@@ -1,8 +1,0 @@
-{
-  "receipt_id": "rec_01_8ab93f",
-  "canonicalization_version": "ciaf-json-v1",
-  "hash_algorithm": "SHA-256",
-  "payload_hash": "f295a32f508a8a86756819fb6d8fb483e5812e9b068eb43e1d51a9e8b70f0322",
-  "signature_algorithm": "Ed25519",
-  "signature": "d38402f093bc821a81...[classical_signature]"
-}

@@ -1,7 +1,0 @@
-{
-  "discovery_id": "disc_8829a",
-  "destination_endpoint": "https://api.unapproved-llm.com/v1/chat",
-  "user_identity_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b",
-  "risk_classification": "MEDIUM_RISK",
-  "remediation_route": "MIGRATE_TO_SANCTIONED_PORTAL"
-}

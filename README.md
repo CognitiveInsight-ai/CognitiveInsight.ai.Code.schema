@@ -1,59 +1,69 @@
-# Cognitive Insight AI 
+# Cognitive Insight AI: AI Governance Evidence Infrastructure (AGEI)
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![PostgreSQL](https://img.shields.io/badge/Supabase-PostgreSQL-blue.svg)](https://supabase.com/)
 
-**Cognitive Insight AI** is the reference portal for the **AI Governance and Evidence Infrastructure (AGEI)**. It provides an open reference infrastructure for collecting, linking, and verifying AI-governance evidence across seven key domains.
+**CognitiveInsight.ai** is the definitive open-source standard for AI accountability. This repository contains the concrete schema implementations of the **AI Governance Evidence Infrastructure (AGEI)**.
 
-## Governance Domains
+While existing tools focus on observability, MLOps, or static documentation (like model cards), AGEI is a new category: an architectural layer designed to **capture, seal, link, store, and retrieve verifiable governance evidence** across the entire AI lifecycle. It provides cryptographically verifiable proof of *what happened, why it happened, under what authority it happened, and whether governance controls were enforced.* 
 
-1. **Model Governance**
-2. **Agent Governance**
-3. **Policy & Authority**
-4. **Evidence & Assurance**
-5. **Provenance & Transparency**
-6. **Shadow AI**
-7. **Privacy & Data Governance**
+**Our motto is "Proof, Not Logs."**
 
-The Five Governance Planes—identity, policy, privilege, execution, and evidence—connect these domains through a common, auditable control architecture.
+## 🏗️ The 6 Core AGEI Architecture Components
 
-## Getting Started
+Based on the foundational paper *AI Governance Evidence Infrastructure: A Category Framework for Cryptographically Verifiable AI Lifecycle Accountability*, this repository implements the six core functional components of AGEI:
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with `create-next-app`.
+1. **CIAF-LCM (Lifecycle Evidence Model)**: Represents AI events as structured receipts across data, training, validation, deployment, and runtime. *Lazy Capsule Materialization (LCM)* ensures lightweight footprints are captured continuously, while heavy evidence capsules are materialized only when triggered by gates or audits.
+2. **Governance Gates**: Explicit control points placed at consequential transitions (e.g., provenance gates before training, approval gates before deployment, pre-action gates before an agent executes a sensitive tool call).
+3. **Tamper-Evident Evidence Vault**: The durable custody layer where evidence objects are canonicalized, hashed, signed, linked, and stored for later offline verification.
+4. **Agent Governance Planes**: A 5-plane model governing autonomous agents: Identity, Policy, Privilege, Execution, and Evidence.
+5. **Shadow AI Capture**: Extends the evidence perimeter to monitor and record unmanaged or unsanctioned AI SaaS usage.
+6. **Downstream Provenance**: Mechanisms for tracing distributed artifacts, including watermarking, forensic fingerprinting, and dual-layer hashing.
+
+---
+
+## 🗄️ Supabase Schema Implementation
+
+This repository materializes the AGEI framework into a production-grade relational database contract using **Supabase (PostgreSQL)**. 
+
+The schema is divided into distinct "Families" that map directly to the 6 core components, located in `supabase/migrations/`:
+
+- `...01_family_9_extension_vocabulary.sql`: Core vocabulary and extensions.
+- `...02_family_1_tenant_identity.sql`: Multi-tenant identities, principals, and service accounts.
+- `...03_family_2_policy_gate_enforcement.sql`: Implementation of **Governance Gates**, thresholds, and human-in-the-loop overrides.
+- `...04_family_3_receipts_evidence_vault.sql`: The **Tamper-Evident Evidence Vault** for storing signed micro-receipts and canonicalized audit packs.
+- `...05_family_4_lifecycle_objects.sql`: The **CIAF-LCM** tables mapping datasets, models, and environments.
+- `...06_family_5_agentic_governance.sql`: The **Agent Governance Planes**, tracking tool delegations and autonomous actions.
+- `...07_family_6_downstream_provenance.sql`: Tables for tracking **Downstream Provenance** and watermarked artifacts.
+- `...08_family_7_shadow_ai.sql`: Schemas for **Shadow AI Capture** and SaaS discovery.
+- `...09_family_8_privacy_data.sql`: Privacy overlays and cryptographic redaction (Right-to-be-Forgotten without breaking signatures).
+- `...10_rls_and_triggers.sql`: Enforces **Write-Once-Read-Many (WORM)** compliance at the database engine level and binds Row-Level Security (RLS) to tenant boundaries.
+
+---
+
+## 🚀 Getting Started
+
+This repository leverages Supabase for local development and schema management.
 
 ### Prerequisites
+- [Supabase CLI](https://supabase.com/docs/guides/cli)
+- Docker Desktop (for local Supabase stack)
 
-Ensure you have Node.js (v18 or higher) and npm installed.
+### Initialization
 
-### Installation
-
-1. Clone the repository:
+1. **Start the local Supabase instance:**
    ```bash
-   git clone https://github.com/CognitiveInsight-ai/Cognitiveinsight.AI.git
-   cd Cognitiveinsight.AI
+   supabase start
    ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   *This will automatically apply all migrations in the `supabase/migrations/` directory, setting up the complete AGEI architecture locally.*
 
-## Deploying on Vercel
+2. **Verify the Schema:**
+   Navigate to the local Supabase Studio URL provided in your terminal to inspect the deployed tables, RLS policies, and WORM triggers.
 
-This repository is fully configured and ready to be deployed on [Vercel](https://vercel.com). Vercel is the creator of Next.js and offers a seamless deployment experience.
+## 🤝 How to Get Involved
 
-1. Push your code to your GitHub repository.
-2. Sign in to [Vercel](https://vercel.com) and click **Add New...** > **Project**.
-3. Import your GitHub repository.
-4. Vercel will automatically detect that it's a Next.js project and configure the build settings.
-5. Click **Deploy**.
+This site is a living repository. We want to collaborate on building a verifiable future for AI.
 
-## License
+## 📄 License
 
-Unless otherwise stated, website content, names, and marks are proprietary to Cognitive Insight LLC. 
-
-Specified reference implementations, schemas, and code are licensed under the [Apache License, Version 2.0](LICENSE).
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details. Contributions made to this repository must be licensed under the same Apache 2.0 terms.
