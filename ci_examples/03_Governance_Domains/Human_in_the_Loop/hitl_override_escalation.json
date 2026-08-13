@@ -1,0 +1,8 @@
+{
+  "escalation_id": "esc_9921_f92",
+  "gate_evaluation_id": "gate_eval_331b",
+  "is_overridden": true,
+  "override_reason": "Emergency production database failover recovery sequence validation bypass",
+  "override_by_principal": "user_principal_root_admin",
+  "signature": "3045022100e47087e3845bbfef71c9db878cb123df7a76059d0fbbf9659b9ec885c7bb5e50022026..."
+}

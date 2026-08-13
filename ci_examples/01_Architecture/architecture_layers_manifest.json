@@ -1,0 +1,69 @@
+{
+  "framework": "AI Governance Evidence Infrastructure (AGEI)",
+  "version": "1.0.0",
+  "layers": [
+    {
+      "layer": 1,
+      "name": "Policy Intent",
+      "tables": [
+        "policy_sets",
+        "policy_versions",
+        "policy_rules"
+      ]
+    },
+    {
+      "layer": 2,
+      "name": "Rule Evaluation",
+      "tables": [
+        "policy_evaluations"
+      ]
+    },
+    {
+      "layer": 3,
+      "name": "Gate Enforcement",
+      "tables": [
+        "gate_definitions",
+        "gate_evaluations"
+      ]
+    },
+    {
+      "layer": 4,
+      "name": "Lifecycle Registry",
+      "tables": [
+        "ai_lifecycle_objects",
+        "ai_lifecycle_object_links"
+      ]
+    },
+    {
+      "layer": 5,
+      "name": "Receipts",
+      "tables": [
+        "receipts",
+        "receipt_links"
+      ]
+    },
+    {
+      "layer": 6,
+      "name": "Evidence Payloads",
+      "tables": [
+        "evidence_objects"
+      ]
+    },
+    {
+      "layer": 7,
+      "name": "Vault Custody",
+      "tables": [
+        "vault_objects",
+        "receipt_batches"
+      ]
+    },
+    {
+      "layer": 8,
+      "name": "Audit Export",
+      "tables": [
+        "audit_packs",
+        "verification_jobs"
+      ]
+    }
+  ]
+}

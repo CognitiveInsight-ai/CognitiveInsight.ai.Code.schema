@@ -1,0 +1,11 @@
+{
+  "receipt_id": "rec_01_8ab93f",
+  "algorithms": {
+    "classical": "Ed25519",
+    "post_quantum": "ML-DSA-65"
+  },
+  "signatures": {
+    "classical_sig": "d38402f093bc821a81...",
+    "post_quantum_sig": "ml_dsa_65_signature_3300_bytes_of_lattice_parameters_..."
+  }
+}

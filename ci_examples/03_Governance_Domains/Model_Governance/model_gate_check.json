@@ -1,0 +1,17 @@
+{
+  "artifact_id": "model_risk_valuation_v4",
+  "gate_definition_id": "production_release_gate",
+  "status": "APPROVED",
+  "evaluations": [
+    {
+      "rule": "bias_detection_check",
+      "status": "PASS",
+      "score": 0.98
+    },
+    {
+      "rule": "accuracy_threshold_check",
+      "status": "PASS",
+      "score": 0.94
+    }
+  ]
+}

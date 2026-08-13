@@ -1,0 +1,7 @@
+{
+  "event": "model_version_promoted",
+  "model_name": "Risk_Valuation_Model",
+  "version": "4",
+  "target_stage": "Production",
+  "webhook_trigger_url": "https://cognitiveinsight.ai/api/v1/gate/evaluate"
+}

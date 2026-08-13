@@ -1,0 +1,10 @@
+
+policy_set:
+  id: enterprise_safety_policy_v2
+  rules:
+    - id: disparage_impact_check
+      threshold: 0.80
+      severity: BLOCK
+    - id: accuracy_threshold_check
+      threshold: 0.90
+      severity: BLOCK

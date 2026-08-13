@@ -1,0 +1,11 @@
+{
+  "session_id": "session_883a_992f",
+  "parent_agent_id": "orchestrator_agent_01",
+  "child_agent_id": "db_writer_agent_05",
+  "delegated_tools": [
+    "write_record",
+    "query_table"
+  ],
+  "access_token_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "valid_until": "2026-08-12T14:00:00Z"
+}
