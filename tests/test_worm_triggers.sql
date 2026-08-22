@@ -10,16 +10,16 @@ GRANT USAGE ON SCHEMA public TO authenticated;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO authenticated;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO authenticated;
 
-SET ROLE authenticated;
-SET app.current_org_id = '33333333-3333-3333-3333-333333333333';
-
--- 1. Insert an evidence_object
+-- 1. Insert an evidence_object (as superuser)
 DO $$
 BEGIN
     INSERT INTO public.evidence_objects (id, organization_id, content_hash, object_type)
     VALUES ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '33333333-3333-3333-3333-333333333333', 'hash_b', 'document')
     ON CONFLICT DO NOTHING;
 END $$;
+
+SET ROLE authenticated;
+SET app.current_org_id = '33333333-3333-3333-3333-333333333333';
 
 -- 2. Test UPDATE block
 DO $$

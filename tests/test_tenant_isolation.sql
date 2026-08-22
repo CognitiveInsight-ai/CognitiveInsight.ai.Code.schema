@@ -11,18 +11,16 @@ GRANT USAGE ON SCHEMA public TO authenticated;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO authenticated;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO authenticated;
 
--- Switch to the authenticated role for RLS
-SET ROLE authenticated;
-
--- Test Case 1: Insert as Org A
-SET app.current_org_id = '11111111-1111-1111-1111-111111111111';
-
+-- Test Case 1: Insert as Org A (superuser setup)
 DO $$
 BEGIN
     INSERT INTO public.receipts (id, organization_id, content_hash, signature, receipt_type, event_timestamp, payload)
     VALUES ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', '11111111-1111-1111-1111-111111111111', 'hash_a', '\x00', 'test', now(), '{}'::jsonb)
     ON CONFLICT DO NOTHING;
 END $$;
+
+-- Switch to the authenticated role for RLS read testing
+SET ROLE authenticated;
 
 -- Test Case 2: Read as Org B (Should not see Org A's receipt)
 SET app.current_org_id = '22222222-2222-2222-2222-222222222222';
