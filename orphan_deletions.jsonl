@@ -1,0 +1,2 @@
+{"blob_key": "cleanup_test/case1.json", "last_modified": "2026-01-01T10:55:00", "deleted_at": "2026-01-01T12:00:00", "reason": "orphan_ttl_exceeded", "age_seconds": 3900.0}
+{"blob_key": "cleanup_test/case5.json", "last_modified": "2026-01-01T10:59:59", "deleted_at": "2026-01-01T12:00:00", "reason": "orphan_ttl_exceeded", "age_seconds": 3601.0}

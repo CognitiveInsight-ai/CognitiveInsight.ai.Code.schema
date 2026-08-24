@@ -1,5 +1,27 @@
 # LCM Storage Evaluation & Architecture Breakdown
 
+## Version & Supersession Note
+
+**Document:** lcm_storage_evaluation.md
+**Date generated:** 2026-08-22
+**Scripts executed this run:**
+- `evaluate_lcm_storage.sql` — `tests/evaluate_lcm_storage.sql` 
+
+**Known older/sibling scripts NOT run, and why:**
+- (none, if not applicable)
+
+**Relationship to prior documents:**
+- [ ] This document supersedes: [doc name/section] — reason: [...]
+- [x] This document is superseded by: `architectural_validation_report.md`
+- [ ] This document is standalone / does not conflict with prior documents
+- [ ] UNRESOLVED CONFLICT — flagged for human review, not yet reconciled: [describe the conflicting claim and both source numbers]
+
+**Claims in this document, by evidentiary status:**
+| Claim | Status (MEASURED / MODELED) | Source |
+|---|---|---|
+| LCM Storage Savings at 5% rate is 98% | MEASURED (FLAWED) | `evaluate_lcm_storage.sql` |
+
+**Scope boundary:** This document does not establish: Rigorous column sizing metrics that avoid PostgreSQL TOAST compression artifacts on synthetic datasets.
 This document provides a complete conceptual and empirical breakdown of the Lazy Capsule Materialization (LCM) testing results, explaining exactly how the AGEI database manages high-volume AI event data.
 
 ## The Empirical Storage Test

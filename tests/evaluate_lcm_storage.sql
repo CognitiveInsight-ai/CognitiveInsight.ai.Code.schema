@@ -15,6 +15,7 @@ DECLARE
     
     simulated_payload jsonb;
     payload_hash text;
+    receipt_type text;
 BEGIN
     CREATE TEMP TABLE temp_cold_blob (payload jsonb);
 
@@ -25,8 +26,25 @@ BEGIN
 
     -- Generate 1000 events
     FOR i IN 1..1000 LOOP
-        -- Simulate a heavy 5KB LLM context payload
-        simulated_payload := ('{"prompt": "Generate a summary...", "context": "' || repeat('A', 5000) || '"}')::jsonb;
+        -- Simulate various AI events based on schema
+        IF i % 5 = 0 THEN
+            receipt_type := 'gate_evaluation';
+            simulated_payload := ('{"gate_id": "gate_123", "policy": "no_pii", "context": "' || repeat('B', 1000) || '"}')::jsonb;
+        ELSIF i % 5 = 1 THEN
+            receipt_type := 'tool_execution';
+            simulated_payload := ('{"tool": "database_query", "query_context": "' || repeat('C', 5000) || '"}')::jsonb;
+        ELSIF i % 5 = 2 THEN
+            receipt_type := 'privacy_redaction';
+            simulated_payload := ('{"redacted_fields": ["ssn", "email"], "original_text": "' || repeat('D', 4000) || '"}')::jsonb;
+        ELSIF i % 5 = 3 THEN
+            receipt_type := 'shadow_ai_discovery';
+            simulated_payload := '{"model": "unauthorized-llm", "endpoint": "api.shadow.com"}'::jsonb;
+        ELSE
+            receipt_type := 'agent_action';
+            simulated_payload := ('{"agent_id": "agent_x", "thought_process": "' || repeat('E', 2000) || '"}')::jsonb;
+        END IF;
+        
+        -- Use a dummy hash representing SHA-256 for the benchmark
         payload_hash := md5(simulated_payload::text);
         
         -- 1. Real Data Size (What it costs if we just store the raw JSON directly)
@@ -35,7 +53,7 @@ BEGIN
         -- 2. Hot Data Size (The micro-receipt in AGEI)
         -- Insert receipt (Hot Pool)
         INSERT INTO public.receipts (organization_id, content_hash, signature, receipt_type, event_timestamp, payload)
-        VALUES (org_id, payload_hash, '\x00', 'lcm_eval', now(), '{"status": "ok"}'::jsonb);
+        VALUES (org_id, payload_hash, '\x00', receipt_type, now(), '{"status": "recorded"}'::jsonb);
         
         -- We estimate the hot size as the size of the receipt row. 
         -- In a real table, pg_relation_size is better, but we are aggregating.
